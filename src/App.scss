@@ -1,0 +1,667 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.App {
+  padding-top: 17px;
+  padding-bottom: 190px;
+}
+
+.game__bet_confirm.disabled {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.actions__item_btn {
+  background-image: url("./assets/img/btn/gray.png");
+  padding: 16px 80px;
+  padding-left: 75px;
+  padding-right: 85px;
+  padding-top: 14px;
+  padding-bottom: 17px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-size: contain;
+  background-position: center center;
+  width: 230px;
+  font-weight: bold;
+  font-size: 24px;
+  text-decoration: none;
+  color: #292929;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+  transition: 0.25s ease all;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a,
+button,
+.game__guess_item {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.actions__item_btn img {
+  margin-right: 10px;
+}
+
+.actions__item_btn:active {
+  opacity: 0.5;
+}
+
+.logo img {
+  width: 250px;
+}
+
+.container {
+  width: 90%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.aic {
+  align-items: center;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.fdc {
+  flex-direction: column;
+}
+
+#app {
+  padding-top: 17px;
+  padding-bottom: 190px;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.game__back {
+  cursor: pointer;
+  transition: 0.25s ease opacity;
+}
+
+.game__back:active {
+  opacity: 0.6;
+}
+
+.game__back img {
+  width: 44px;
+}
+
+.game__logo img {
+  width: 70px;
+}
+
+.game__ton img {
+  width: 20px;
+}
+
+.game__ton {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 12px;
+  padding-top: 8px;
+  width: 138px;
+  padding-bottom: 12px;
+  background-image: url("./assets/img/btn/green-mini.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.game__ton span {
+  padding: 0 13px;
+}
+
+.game__guessed {
+  display: flex;
+  justify-content: center;
+}
+
+.game__guessed_plaque {
+  background-image: url("./assets/img/btn/gray.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  text-align: center;
+  font-size: 12px;
+  padding: 15px 15px;
+  padding-top: 13px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  width: 200px;
+}
+
+.bid {
+  padding: 17px 14px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("./assets/img/btn/gray.png");
+  width: 200px;
+}
+
+.game__bid h3 {
+  margin: 12px 0;
+  margin-top: 20px;
+  font-size: 23px;
+}
+
+.game__card {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.game__card img {
+  width: 20vh;
+}
+
+.bid__plus,
+.bid__minus {
+  transition: 0.25s ease opacity;
+  cursor: pointer;
+}
+
+.bid__plus:active,
+.bid__minus:active {
+  opacity: 0.6;
+}
+
+.game__bet_handle {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.game__bet_handle img {
+  width: 70%;
+}
+
+.game__bet_item {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  transition: 0.25s ease opacity;
+  cursor: pointer;
+}
+
+.game__guess_item {
+  transition: transform 0.2s ease; /* Анимация для плавного эффекта */
+}
+
+.game__guess_item.selected {
+  transform: scale(0.9);
+  opacity: 0.8;
+}
+
+.game__bet_item:active {
+  opacity: 0.5;
+}
+
+.game__bet_item.active {
+  display: flex;
+}
+
+.game__guess img {
+  width: 100%;
+}
+
+.game__guess__item {
+  width: 20%;
+}
+
+.game__guess_item {
+  width: 170px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: 0.25s ease opacity;
+}
+
+.game__guess_item:active {
+  opacity: 0.6;
+}
+
+.game__guess {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.win-lose {
+  width: 90%;
+  height: 200px;
+  position: absolute;
+  top: 47%;
+  transform: translateY(-50%);
+  right: 0;
+  margin: 0 auto;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+
+  /* background: rgba(255, 255, 255, 0.192); */
+  backdrop-filter: blur(2.2px);
+  /* opacity: 0.9; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  z-index: 1001;
+}
+
+.win-lose.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.win-lose__item span.red-color {
+  color: #c94e35;
+}
+
+.game__result {
+  font-weight: 700;
+  font-size: 64px;
+  color: #65ffcb;
+  font-family: "Qanelas", sans-serif;
+  text-shadow: -2px -2px 0 rgb(0, 0, 0), 2px -2px 0 rgb(0, 0, 0),
+    -2px 2px 0 rgb(0, 0, 0), 2px 2px 0 rgb(0, 0, 0);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1647058824);
+  z-index: 1000;
+}
+
+.win-lose img {
+  width: 100%;
+  max-width: 95%;
+}
+
+.win-lose__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.win-lose__item.active {
+  display: flex;
+}
+
+.win-lose__item button {
+  background: transparent;
+  border: none;
+  display: block;
+  height: 30px;
+  width: 300px;
+  background-size: cover;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.25s ease opacity;
+}
+
+.win-lose__item button:active {
+  opacity: 0.6;
+}
+
+.win-lose__item button img {
+  max-width: 240px;
+}
+
+#app {
+  height: 100vh;
+}
+
+.win-lose {
+  background-image: url("./assets/img/popup-bg.png");
+}
+
+@media screen and (max-width: 380px) {
+  .win-lose {
+    height: 150px;
+  }
+
+  .win-lose__item button {
+    margin-top: 10px;
+  }
+}
+
+.top-page__info {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.top-page__info_content {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  position: absolute;
+  align-items: center;
+  top: 0;
+  padding: 10px 17px;
+  padding-top: 13px;
+  width: 100%;
+}
+
+.top-page__info_content span:first-child {
+  font-weight: bold;
+}
+
+.top-page__info_item {
+  position: relative;
+}
+
+.top-page__players_item {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 18px 0;
+}
+
+.top-page__players_item span {
+  padding: 13px 40px;
+  position: absolute;
+  top: 0;
+  font-weight: bold;
+  left: 0;
+}
+
+.top-page .h2 {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.earn-page__plaque {
+  padding: 20px;
+}
+
+.earn-page__title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.game__guess_item,
+.earn-page__copy,
+.earn-page__share {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game__guess_item span,
+.earn-page__copy span,
+.earn-page__share span {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 93%;
+  color: #fff;
+}
+
+.earn-page__copy img,
+.earn-page__share img {
+  width: 140px;
+}
+
+.earn-page__copy,
+.earn-page__share {
+  transition: 0.25s ease opacity;
+}
+
+.earn-page__copy:active,
+.earn-page__share:active {
+  opacity: 0.4;
+}
+
+.earn-page__plaque {
+  margin: 20px 0;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.earn-page__buttons {
+  margin-top: 40px;
+}
+
+.earn-page__title {
+  margin-bottom: 10px;
+}
+
+.earn-page__text {
+  margin: 10px 0;
+}
+
+.earn-page__plaque {
+  background-image: url("./assets/img/cards/invited-plaque.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.earn-page__buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.earn-page__copy {
+  margin-right: 10px;
+}
+
+.earn-page__link {
+  background-image: url("./assets/img/cards/invite-plaque.png");
+  background-size: 100%;
+  height: 150px;
+  background-repeat: no-repeat;
+  padding: 20px;
+}
+
+.earn-page__l {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  /* justify-content: space-between; */
+}
+
+.earn-page__l span {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.earn-page__link p {
+  font-size: 10px;
+  color: #00000080;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.earn-page__link {
+  margin-top: 40px;
+}
+
+.wallet-page h3 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.wallet-page__plaque {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-page__plaque span {
+  position: absolute;
+  padding: 11px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.wallet-page__plaque img {
+  width: 215px;
+}
+
+.wallet-page__action img {
+  width: 100%;
+}
+
+.wallet-page__action {
+  max-width: 312px;
+  margin: 0 auto;
+  margin-top: 170px;
+}
+
+.wallet-page__action {
+  transition: 0.25s ease opacity;
+}
+
+.wallet-page__action:active {
+  opacity: 0.5;
+}
+
+.rules {
+  padding: 20px;
+  background-image: url("./assets/img/cards/rules-bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 340px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1647058824);
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.rules-next {
+  background: transparent;
+  padding: 0;
+  border: none;
+  width: 300px;
+  cursor: pointer;
+  /* transition: 0.25s ease opacity; */
+}
+
+.rules-next:active {
+  opacity: 0.5;
+}
+
+.rules-next img {
+  width: 100%;
+}
+
+.rules b,
+.rules h3 {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+}
+
+.rules-describtion {
+  margin: 10px 0;
+}
+
+.rules h3 {
+  font-size: 20px;
+  padding: 0 30px;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.rules-gray {
+  font-size: 12px;
+  padding: 0 40px;
+  padding-top: 10px;
+}
+
+.rules-table {
+  justify-content: center;
+}
+
+.rules-table__column {
+  margin: 15px 10px;
+  font-weight: bold;
+}
+
+.rules-table__item {
+  margin: 10px 0;
+}
+
+button,
+a {
+  cursor: pointer;
+  transition: 0.25s ease transform;
+}
+
+button:active,
+a:active {
+  transform: scale(0.95);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
