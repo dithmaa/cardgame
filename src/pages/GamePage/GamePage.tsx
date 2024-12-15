@@ -3,11 +3,9 @@ import cardBack from "../../assets/img/cardss/54.png";
 import confirmBtn from "../../assets/img/btn/confirm-btn.png";
 import redBtn from "../../assets/img/btn/red.png";
 import blackBtn from "../../assets/img/btn/black.png";
-import winSvg from "../../assets/img/win.svg";
-import loseSvg from "../../assets/img/lose.svg";
 import nextBtnImg from "../../assets/img/btn/next.svg";
-import { ReactComponent as PlusIcon } from "../../assets/img/icon/plus.svg";
-import { ReactComponent as MinusIcon } from "../../assets/img/icon/minus.svg";
+import PlusIcon from "../../assets/img/icon/plus.png";
+import MinusIcon from "../../assets/img/icon/minus.png";
 import { Header } from "../../components";
 
 enum CardColor {
@@ -102,7 +100,8 @@ export const GamePage = () => {
   };
 
   const handleNext = () => {
-    setResultMessage(""); // Скрываем окно
+    setResultMessage(""); // Скрываем окно результата
+    setSelectedColor(null); // Сбрасываем выбранный цвет
   };
 
   const isRedCard = (index: number) => {
@@ -138,11 +137,11 @@ export const GamePage = () => {
           <h3 className="h3">Your bid:</h3>
           <div className="bid flex jcsb">
             <div className="bid__minus" onClick={decreaseBidCount}>
-              <MinusIcon />
+              <img src={MinusIcon} alt="" />
             </div>
             <span>{String(bidCount).slice(0, 4)}</span>
             <div className="bid__plus" onClick={increaseBidCount}>
-              <PlusIcon />
+              <img src={PlusIcon} alt="" />
             </div>
           </div>
         </div>

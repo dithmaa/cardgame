@@ -19,8 +19,16 @@ body {
 }
 
 .game__bet_confirm.disabled {
-  opacity: 0.8;
+  opacity: 0.6;
   pointer-events: none;
+  filter: grayscale(100%);
+}
+
+.bid__plus,
+.bid__minus {
+  img {
+    width: 20px;
+  }
 }
 
 .actions__item_btn {
