@@ -9,7 +9,6 @@ const tg = window.Telegram?.WebApp;
 
 export const HomePage = () => {
   console.log(tg);
-
   return (
     <div className="home-page">
       <div className="container" style={{ paddingTop: "25px" }}>
