@@ -11,6 +11,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   user-select: none;
+  background: radial-gradient(#44556c, #040f1c);
 }
 
 .App {
@@ -182,6 +183,14 @@ button,
   margin: 12px 0;
   margin-top: 20px;
   font-size: 23px;
+  color: #fff;
+}
+
+.h2,
+.h3.h4,
+.h1,
+h3 {
+  color: #fff;
 }
 
 .game__card {
@@ -672,4 +681,30 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .home-page .container {
+    padding-top: 5px !important;
+  }
+  .actions__item_btn {
+    padding: 13px 80px;
+  }
+  .logo img {
+    width: 220px;
+  }
+  .earn-page__text {
+    font-size: 13px;
+  }
+  .earn-page__title {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+  .earn-page__l {
+    font-size: 14px;
+  }
+  .earn-page__link p {
+    font-size: 10px;
+    margin: 4px 0;
+  }
 }

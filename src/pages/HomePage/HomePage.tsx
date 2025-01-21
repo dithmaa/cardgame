@@ -5,7 +5,11 @@ import { ReactComponent as SackSvg } from "../../assets/img/icon/sack-ton.svg";
 import WalletSvg from "../..//assets/img/icon/wallet.svg";
 import { Link } from "react-router";
 
+const tg = window.Telegram?.WebApp;
+
 export const HomePage = () => {
+  console.log(tg);
+
   return (
     <div className="home-page">
       <div className="container" style={{ paddingTop: "25px" }}>
