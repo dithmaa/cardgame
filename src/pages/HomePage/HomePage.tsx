@@ -4,11 +4,16 @@ import { ReactComponent as ChampionSvg } from "../../assets/img/icon/champion.sv
 import { ReactComponent as SackSvg } from "../../assets/img/icon/sack-ton.svg";
 import WalletSvg from "../..//assets/img/icon/wallet.svg";
 import { Link } from "react-router";
+import { useEffect, useState } from "react";
 
 const tg = window.Telegram?.WebApp;
 
 export const HomePage = () => {
+  const [userName, setName] = useState("");
   console.log("telegram", tg?.initDataUnsafe);
+  useEffect(() => {
+    setName(String(tg?.initDataUnsafe?.user?.first_name));
+  }, [tg?.initDataUnsafe]);
   return (
     <div className="home-page">
       <div className="container" style={{ paddingTop: "25px" }}>
@@ -16,6 +21,7 @@ export const HomePage = () => {
           <div className="logo">
             <img src={logoImg} alt="" />
           </div>
+          <h1 style={{ color: "white" }}>{userName ? userName : "Name"}</h1>
           <div className="actions">
             <div className="actions__item">
               <Link to="/game" className="actions__item_btn">
