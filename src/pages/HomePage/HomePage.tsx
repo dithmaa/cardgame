@@ -8,7 +8,7 @@ import { Link } from "react-router";
 const tg = window.Telegram?.WebApp;
 
 export const HomePage = () => {
-  console.log(tg);
+  console.log("telegram", tg?.initDataUnsafe);
   return (
     <div className="home-page">
       <div className="container" style={{ paddingTop: "25px" }}>
