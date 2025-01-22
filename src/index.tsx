@@ -7,7 +7,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <TonConnectUIProvider manifestUrl="https://violet-traditional-rabbit-103.mypinata.cloud/ipfs/QmQJJAdZ2qSwdepvb5evJq7soEBueFenHLX3PoM6tiBffm">
+  <TonConnectUIProvider manifestUrl="https://teal-big-falcon-529.mypinata.cloud/files/bafkreihjzcj63nw4akkz76ddfbtptuf7amntoasaiacnrbsc6ethjdbjwy?X-Algorithm=PINATA1&X-Date=1737532189&X-Expires=30&X-Method=GET&X-Signature=0c2aabbd3a942d061f800d4c63a6138d037e1176281a663943307665c59d3256">
     <App />
   </TonConnectUIProvider>
 );
