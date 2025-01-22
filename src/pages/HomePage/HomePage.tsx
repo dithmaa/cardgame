@@ -1,7 +1,7 @@
 import logoImg from "../../assets/img/logo.png";
-import { ReactComponent as CardsSvg } from "../../assets/img/icon/cards.svg";
-import { ReactComponent as ChampionSvg } from "../../assets/img/icon/champion.svg";
-import { ReactComponent as SackSvg } from "../../assets/img/icon/sack-ton.svg";
+import CardsSvg from "../../assets/img/icon/cards.svg";
+import ChampionSvg from "../../assets/img/icon/champion.svg";
+import SackSvg from "../../assets/img/icon/sack-ton.svg";
 import WalletSvg from "../..//assets/img/icon/wallet.svg";
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
@@ -27,19 +27,19 @@ export const HomePage = () => {
           <div className="actions">
             <div className="actions__item">
               <Link to="/game" className="actions__item_btn">
-                <CardsSvg />
+                <img src={CardsSvg} alt="" />
                 <span>Play</span>
               </Link>
             </div>
             <div className="actions__item">
               <Link to="/top" className="actions__item_btn">
-                <ChampionSvg />
+                <img src={ChampionSvg} alt="" />
                 <span>Top</span>
               </Link>
             </div>
             <div className="actions__item">
               <Link to={"/earn"} className="actions__item_btn">
-                <SackSvg />
+                <img src={SackSvg} alt="" />
                 <span>Earn</span>
               </Link>
             </div>

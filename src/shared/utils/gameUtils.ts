@@ -22,10 +22,24 @@ export const calculateMultiplier = (count: number): number => {
 };
 
 export const loadCardImages = (count: number): string[] => {
-  return Array.from({ length: count }, (_, i) =>
-    require(`../../assets/img/cardss/${i + 1}.png`)
-  );
+  // Используем import.meta.glob для импорта всех изображений из папки
+  const images = import.meta.glob("../../assets/img/cardss/*.png", {
+    eager: true,
+  });
+
+  // Преобразуем в массив строк (путей к изображениям)
+  return Array.from({ length: count }, (_, i) => {
+    const key = `../../assets/img/cardss/${i + 1}.png`;
+    const image = images[key];
+
+    if (!image) {
+      throw new Error(`Image not found: ${key}`);
+    }
+
+    return (image as { default: string }).default;
+  });
 };
+
 export const revealFinalCard = (
   color: CardColor,
   nextCard: string,
