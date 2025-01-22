@@ -18,7 +18,7 @@ export const Header = () => {
               </div>
               <div className="game__ton">
                 <img src={tonIcon} alt="" />
-                <span>0.03</span>
+                <span>-1</span>
                 <img src={tonIcon} alt="" />
               </div>
             </div>

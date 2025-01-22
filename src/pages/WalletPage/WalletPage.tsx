@@ -2,9 +2,7 @@ import { Header } from "../../components";
 import walletPagePlaque from "../../assets/img/cards/wallet-page-plaque.png";
 import connectWalletPng from "../../assets/img/cards/connect-wallet.png";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-import { Address } from "@ton/core";
 import { useCallback, useEffect, useState } from "react";
-import { TonClient } from "@ton/ton";
 
 export const WalletPage = () => {
   const [tonConnectUI] = useTonConnectUI();
@@ -12,28 +10,39 @@ export const WalletPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [balance, setBalance] = useState<number | null>(null);
 
-  // Создаем экземпляр TonClient
-  const tonClient = useCallback(
-    () =>
-      new TonClient({
-        endpoint: "https://toncenter.com/api/v2/jsonRPC",
-      }),
-    []
-  )();
+  const fetchBalance = useCallback(async (address: string) => {
+    try {
+      console.log("Fetching balance for:", address); // Для отладки
 
-  const fetchBalance = useCallback(
-    async (address: string) => {
-      try {
-        const addressInstance = Address.parse(address);
-        const balanceResponse = await tonClient.getBalance(addressInstance);
-        setBalance(Number(balanceResponse) / 1e9); // Преобразуем баланс из наноTON в TON
-      } catch (error) {
-        console.error("Failed to fetch balance:", error);
+      const response = await fetch("https://toncenter.com/api/v2/jsonRPC", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          method: "getAddressBalance", // Метод для получения баланса
+          params: {
+            address: address, // Адрес для получения баланса
+          },
+          id: "1", // Идентификатор запроса
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.ok && data.result) {
+        console.log("Balance response:", data.result); // Для отладки
+        setBalance(Number(data.result) / 1e9); // Преобразуем баланс из наноTON в TON
+      } else {
+        console.error("Failed to fetch balance:", data.error);
         setBalance(null);
       }
-    },
-    [tonClient]
-  );
+    } catch (error) {
+      console.error("Failed to fetch balance:", error);
+      setBalance(null);
+    }
+  }, []);
 
   const handleWalletConnection = useCallback(
     (address: string) => {
@@ -93,7 +102,7 @@ export const WalletPage = () => {
   }
 
   return (
-    <div className="wallet-page opacity-40">
+    <div className="wallet-page">
       <Header />
       <div className="container">
         <div
@@ -123,7 +132,7 @@ export const WalletPage = () => {
 
           {tonWalletAddress ? (
             <div className="flex flex-col items-center">
-              <p className="mb-4">
+              <p className="my-4 text-[#fff]">
                 Connected: {formatAddress(tonWalletAddress)}
               </p>
               <button
