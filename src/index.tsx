@@ -2,12 +2,20 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import { Buffer } from "buffer";
+
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
+
+const buffer = Buffer.from("Hello, world!");
+console.log(buffer.toString("utf-8"));
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <TonConnectUIProvider manifestUrl="https://teal-big-falcon-529.mypinata.cloud/files/bafkreihjzcj63nw4akkz76ddfbtptuf7amntoasaiacnrbsc6ethjdbjwy?X-Algorithm=PINATA1&X-Date=1737532189&X-Expires=30&X-Method=GET&X-Signature=0c2aabbd3a942d061f800d4c63a6138d037e1176281a663943307665c59d3256">
+  <TonConnectUIProvider manifestUrl="https://teal-big-falcon-529.mypinata.cloud/files/bafkreid5vqslewk7mjpwoyjx64djwoepzddavrjuslsdhyvbirioq53vi4?X-Algorithm=PINATA1&X-Date=1737533788&X-Expires=30&X-Method=GET&X-Signature=b49f6617dde6dfe0cd5ea1e0627470b68d5684fa9e70277440b8c327619283ae">
     <App />
   </TonConnectUIProvider>
 );
