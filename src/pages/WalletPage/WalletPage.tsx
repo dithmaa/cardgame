@@ -4,17 +4,46 @@ import connectWalletPng from "../../assets/img/cards/connect-wallet.png";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
 import { useCallback, useEffect, useState } from "react";
+import { TonClient } from "@ton/ton";
 
 export const WalletPage = () => {
   const [tonConnectUI] = useTonConnectUI();
   const [tonWalletAddress, setTonWalletAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [balance, setBalance] = useState<number | null>(null);
 
-  const handleWalletConnection = useCallback((address: string) => {
-    setTonWalletAddress(address);
-    console.log("Wallet connected successfully!");
-    setIsLoading(false);
-  }, []);
+  // Создаем экземпляр TonClient
+  const tonClient = useCallback(
+    () =>
+      new TonClient({
+        endpoint: "https://toncenter.com/api/v2/jsonRPC",
+      }),
+    []
+  )();
+
+  const fetchBalance = useCallback(
+    async (address: string) => {
+      try {
+        const addressInstance = Address.parse(address);
+        const balanceResponse = await tonClient.getBalance(addressInstance);
+        setBalance(Number(balanceResponse) / 1e9); // Преобразуем баланс из наноTON в TON
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+        setBalance(null);
+      }
+    },
+    [tonClient]
+  );
+
+  const handleWalletConnection = useCallback(
+    (address: string) => {
+      setTonWalletAddress(address);
+      console.log("Wallet connected successfully!");
+      setIsLoading(false);
+      fetchBalance(address); // Загружаем баланс
+    },
+    [fetchBalance]
+  );
 
   const handleWalletDisconnection = useCallback(() => {
     setTonWalletAddress(null);
@@ -56,15 +85,13 @@ export const WalletPage = () => {
   };
 
   const formatAddress = (address: string) => {
-    const encodedAddress = new TextEncoder().encode(address);
-    const firstPart = String.fromCharCode(...encodedAddress.slice(0, 4));
-    const lastPart = String.fromCharCode(...encodedAddress.slice(-4));
-    return `${firstPart}...${lastPart}`;
+    return `${address.slice(0, 4)}...${address.slice(-4)}`;
   };
 
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
+
   return (
     <div className="wallet-page opacity-40">
       <Header />
@@ -80,7 +107,9 @@ export const WalletPage = () => {
           <div className="wallet-page__account" style={{ padding: "25px 0" }}>
             <h3>Your balance</h3>
             <div className="wallet-page__plaque">
-              <span>0</span>
+              <span>
+                {balance !== null ? balance.toFixed(2) : "Loading..."}
+              </span>
               <img src={walletPagePlaque} alt="" />
             </div>
           </div>
