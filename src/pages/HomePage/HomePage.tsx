@@ -31,7 +31,7 @@ export const HomePage = () => {
             <div className="actions__item">
               <Link to="/game" className="actions__item_btn">
                 <img src={CardsSvg} alt="" />
-                <span>Play</span>
+                <span>Play.</span>
               </Link>
             </div>
             <div className="actions__item">
