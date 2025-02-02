@@ -52,7 +52,6 @@ export const WalletPage = () => {
     async (address: string) => {
       setTonWalletAddress(address);
 
-      // Если баланс есть в localStorage, используем его
       const cachedBalance = localStorage.getItem("walletBalance");
       if (cachedBalance) {
         setWalletData(Number(cachedBalance), address);
@@ -60,7 +59,6 @@ export const WalletPage = () => {
         return;
       }
 
-      // Иначе запрашиваем баланс
       const balance = await fetchBalance(address);
       if (balance !== null) {
         setWalletData(balance, address);
@@ -74,11 +72,12 @@ export const WalletPage = () => {
 
   const handleWalletDisconnection = useCallback(() => {
     setTonWalletAddress(null);
+    setWalletData(0, null); // Обнуление состояния контекста
     localStorage.removeItem("walletBalance");
     localStorage.removeItem("walletAddress");
     console.log("Wallet disconnected successfully!");
     setIsLoading(false);
-  }, []);
+  }, [setWalletData]);
 
   useEffect(() => {
     const checkWalletConnection = async () => {
@@ -122,7 +121,7 @@ export const WalletPage = () => {
   };
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <h1 className="text-center text-white"></h1>;
   }
 
   return (
@@ -159,15 +158,15 @@ export const WalletPage = () => {
 
           {tonWalletAddress ? (
             <div className="flex flex-col items-center">
-              <p className="my-4 text-[#fff]">
-                Connected: {formatAddress(tonWalletAddress)}
-              </p>
               <button
                 onClick={handleWalletAction}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-2xl wallet-page__action"
               >
                 Disconnect Wallet
               </button>
+              <p className="my-4 text-[#fff]">
+                Connected: {formatAddress(tonWalletAddress)}
+              </p>
             </div>
           ) : (
             <button
