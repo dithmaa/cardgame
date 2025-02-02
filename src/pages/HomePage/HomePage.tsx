@@ -13,7 +13,11 @@ export const HomePage = () => {
 
   console.log("telegram", tg?.initDataUnsafe);
   useEffect(() => {
+    tg.expand();
+
     setName(String(tg?.initDataUnsafe?.user?.first_name));
+
+    tg.ready();
   }, [tg?.initDataUnsafe]);
 
   return (
