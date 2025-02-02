@@ -31,9 +31,15 @@ export const GamePage = () => {
   const [isWin, setIsWin] = useState(false);
 
   // Увеличение и уменьшение ставки
-  const increaseBidCount = () => setBidCount((bid) => bid + 0.01);
+  const increaseBidCount = () => {
+    setBidCount((bid) => parseFloat((bid + 0.01).toFixed(2)));
+  };
+
+  // Уменьшение ставки
   const decreaseBidCount = () => {
-    if (bidCount > 0.02) setBidCount((bid) => bid - 0.01);
+    if (bidCount > 0.01) {
+      setBidCount((bid) => parseFloat((bid - 0.01).toFixed(2)));
+    }
   };
 
   // Выбор цвета
