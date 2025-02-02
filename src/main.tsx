@@ -7,7 +7,7 @@ import { TonConnectUIProvider } from "@tonconnect/ui-react";
 // (window as any).Buffer = Buffer;
 
 createRoot(document.getElementById("root")!).render(
-  <TonConnectUIProvider manifestUrl="https://teal-big-falcon-529.mypinata.cloud/files/bafkreigsolrp2lhizkovc563qgt7dpbwbrm4jvpchbg4o7dodnk6d4b3im?X-Algorithm=PINATA1&X-Date=1738516727&X-Expires=30&X-Method=GET&X-Signature=f70e5441150be4f0b65aa0ba82d84514e71c346cafb53aaf61024cd321909f95">
+  <TonConnectUIProvider manifestUrl="https://teal-big-falcon-529.mypinata.cloud/files/bafkreiayhequh5wlinfj2nq7apdm5pzyxe2ss7dy4agzvmyc5hr5vu2t6m?X-Algorithm=PINATA1&X-Date=1738516918&X-Expires=30&X-Method=GET&X-Signature=e96b6605928c613587012a7b13964a8c2db8135b69a7811e63e9774485115d26">
     <App />
   </TonConnectUIProvider>
 );
