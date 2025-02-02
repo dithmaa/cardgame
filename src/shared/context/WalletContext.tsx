@@ -4,6 +4,7 @@ interface WalletContextProps {
   balance: number | null;
   walletAddress: string | null;
   setWalletData: (balance: number | null, walletAddress: string | null) => void;
+  setBalance: React.Dispatch<React.SetStateAction<number | null>>; // Экспортируем setBalance
 }
 
 const WalletContext = createContext<WalletContextProps | undefined>(undefined);
@@ -21,7 +22,9 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <WalletContext.Provider value={{ balance, walletAddress, setWalletData }}>
+    <WalletContext.Provider
+      value={{ balance, walletAddress, setWalletData, setBalance }}
+    >
       {children}
     </WalletContext.Provider>
   );

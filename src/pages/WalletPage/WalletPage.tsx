@@ -10,7 +10,7 @@ export const WalletPage = () => {
   const [tonConnectUI] = useTonConnectUI();
   const [tonWalletAddress, setTonWalletAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { balance } = useWalletContext();
+  const { balance, setBalance } = useWalletContext();
 
   const fetchBalance = useCallback(
     async (address: string): Promise<number | null> => {
@@ -114,12 +114,23 @@ export const WalletPage = () => {
     }
 
     const confirmed = window.confirm(
-      "Telegram Alert: Are you sure you want to send 0.01 TON to this app?"
+      "Telegram Alert: Are you sure you want to simulate sending 0.01 TON to this app?"
     );
 
     if (confirmed) {
-      console.log("Transaction simulated: 0.01 TON deducted.");
-      alert("Transaction successful (simulated)");
+      // Проверка, если balance не null
+      if (balance !== null) {
+        const newBalance = balance - 0.01; // Обновление баланса на тестовой сети
+        setBalance(newBalance); // Обновление состояния в контексте
+
+        console.log("Transaction simulated: 0.01 TON deducted.");
+        alert("Transaction successful (simulated)");
+
+        // Если нужно обновить баланс в локальном хранилище
+        localStorage.setItem("walletBalance", newBalance.toString());
+      } else {
+        console.error("Balance is null, cannot proceed with transaction.");
+      }
     }
   };
 
