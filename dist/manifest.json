@@ -1,6 +1,8 @@
 {
   "short_name": "React App",
+  "url": "https://github.com/dithmaa",
   "name": "Create React App Sample",
+  "iconUrl": "https://i.ibb.co/dF6B42G/avatar.png",
   "icons": [
     {
       "src": "favicon.ico",
