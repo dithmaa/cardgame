@@ -107,6 +107,22 @@ export const WalletPage = () => {
     };
   }, [tonConnectUI, handleWalletConnection, handleWalletDisconnection]);
 
+  const handleFakeWithdraw = () => {
+    if (!tonWalletAddress) {
+      alert("Wallet not connected!");
+      return;
+    }
+
+    const confirmed = window.confirm(
+      "Telegram Alert: Are you sure you want to send 0.01 TON to this app?"
+    );
+
+    if (confirmed) {
+      console.log("Transaction simulated: 0.01 TON deducted.");
+      alert("Transaction successful (simulated)");
+    }
+  };
+
   const handleWalletAction = async () => {
     setIsLoading(true);
     if (tonConnectUI.connected) {
@@ -158,6 +174,13 @@ export const WalletPage = () => {
 
           {tonWalletAddress ? (
             <div className="flex flex-col items-center">
+              <button
+                onClick={handleFakeWithdraw}
+                className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl mb-4"
+              >
+                Simulate 0.01 TON Withdraw
+              </button>
+
               <button
                 onClick={handleWalletAction}
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-2xl wallet-page__action"
