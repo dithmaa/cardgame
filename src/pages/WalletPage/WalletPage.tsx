@@ -11,7 +11,8 @@ export const WalletPage = () => {
   const [tonConnectUI] = useTonConnectUI();
   const [tonWalletAddress, setTonWalletAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [balance, setBalance] = useState<number | null>(null);
+
+  const { balance } = useWalletContext();
 
   const fetchBalance = useCallback(
     async (address: string): Promise<number | null> => {
