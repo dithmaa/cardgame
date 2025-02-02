@@ -7,11 +7,9 @@ import { useWalletContext } from "../../shared/context/WalletContext";
 
 export const WalletPage = () => {
   const { setWalletData } = useWalletContext();
-
   const [tonConnectUI] = useTonConnectUI();
   const [tonWalletAddress, setTonWalletAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const { balance } = useWalletContext();
 
   const fetchBalance = useCallback(
@@ -27,16 +25,14 @@ export const WalletPage = () => {
           body: JSON.stringify({
             jsonrpc: "2.0",
             method: "getAddressBalance",
-            params: {
-              address: address,
-            },
+            params: { address },
             id: "1",
           }),
         });
 
         const data = await response.json();
 
-        if (data.ok && data.result) {
+        if (data.result) {
           const balance = Number(data.result) / 1e9;
           console.log("Balance response:", balance);
           return balance;
@@ -53,23 +49,45 @@ export const WalletPage = () => {
   );
 
   const handleWalletConnection = useCallback(
-    (address: string) => {
+    async (address: string) => {
       setTonWalletAddress(address);
-      fetchBalance(address).then((balance) => setWalletData(balance, address));
+
+      // Если баланс есть в localStorage, используем его
+      const cachedBalance = localStorage.getItem("walletBalance");
+      if (cachedBalance) {
+        setWalletData(Number(cachedBalance), address);
+        setIsLoading(false);
+        return;
+      }
+
+      // Иначе запрашиваем баланс
+      const balance = await fetchBalance(address);
+      if (balance !== null) {
+        setWalletData(balance, address);
+        localStorage.setItem("walletBalance", balance.toString());
+        localStorage.setItem("walletAddress", address);
+      }
+      setIsLoading(false);
     },
     [fetchBalance, setWalletData]
   );
 
   const handleWalletDisconnection = useCallback(() => {
     setTonWalletAddress(null);
+    localStorage.removeItem("walletBalance");
+    localStorage.removeItem("walletAddress");
     console.log("Wallet disconnected successfully!");
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
     const checkWalletConnection = async () => {
-      if (tonConnectUI.account?.address) {
-        handleWalletConnection(tonConnectUI.account?.address);
+      const cachedAddress = localStorage.getItem("walletAddress");
+
+      if (cachedAddress) {
+        handleWalletConnection(cachedAddress);
+      } else if (tonConnectUI.account?.address) {
+        handleWalletConnection(tonConnectUI.account.address);
       } else {
         handleWalletDisconnection();
       }
@@ -91,8 +109,8 @@ export const WalletPage = () => {
   }, [tonConnectUI, handleWalletConnection, handleWalletDisconnection]);
 
   const handleWalletAction = async () => {
+    setIsLoading(true);
     if (tonConnectUI.connected) {
-      setIsLoading(true);
       await tonConnectUI.disconnect();
     } else {
       await tonConnectUI.openModal();
