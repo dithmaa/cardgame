@@ -1,9 +1,12 @@
+import { useWalletContext } from "../../shared/context/WalletContext";
 import backArrow from "../../assets/img/icon/back-arrow.png";
 import miniLogo from "../../assets/img/mini-logo.png";
 import tonIcon from "../../assets/img/icon/ton.png";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
+  const { balance } = useWalletContext();
+
   return (
     <header className="header">
       <div className="top-page">
@@ -18,7 +21,7 @@ export const Header = () => {
               </div>
               <div className="game__ton">
                 <img src={tonIcon} alt="" />
-                <span>-1</span>
+                <span>{balance !== null ? balance.toFixed(2) : "0"}</span>
                 <img src={tonIcon} alt="" />
               </div>
             </div>

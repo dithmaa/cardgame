@@ -3,55 +3,60 @@ import walletPagePlaque from "../../assets/img/cards/wallet-page-plaque.png";
 import connectWalletPng from "../../assets/img/cards/connect-wallet.png";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { useCallback, useEffect, useState } from "react";
+import { useWalletContext } from "../../shared/context/WalletContext";
 
 export const WalletPage = () => {
+  const { setWalletData } = useWalletContext();
+
   const [tonConnectUI] = useTonConnectUI();
   const [tonWalletAddress, setTonWalletAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [balance, setBalance] = useState<number | null>(null);
 
-  const fetchBalance = useCallback(async (address: string) => {
-    try {
-      console.log("Fetching balance for:", address); // Для отладки
+  const fetchBalance = useCallback(
+    async (address: string): Promise<number | null> => {
+      try {
+        console.log("Fetching balance for:", address);
 
-      const response = await fetch("https://toncenter.com/api/v2/jsonRPC", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          jsonrpc: "2.0",
-          method: "getAddressBalance", // Метод для получения баланса
-          params: {
-            address: address, // Адрес для получения баланса
+        const response = await fetch("https://toncenter.com/api/v2/jsonRPC", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          id: "1", // Идентификатор запроса
-        }),
-      });
+          body: JSON.stringify({
+            jsonrpc: "2.0",
+            method: "getAddressBalance",
+            params: {
+              address: address,
+            },
+            id: "1",
+          }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.ok && data.result) {
-        console.log("Balance response:", data.result); // Для отладки
-        setBalance(Number(data.result) / 1e9); // Преобразуем баланс из наноTON в TON
-      } else {
-        console.error("Failed to fetch balance:", data.error);
-        setBalance(null);
+        if (data.ok && data.result) {
+          const balance = Number(data.result) / 1e9;
+          console.log("Balance response:", balance);
+          return balance;
+        } else {
+          console.error("Failed to fetch balance:", data.error);
+          return null;
+        }
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+        return null;
       }
-    } catch (error) {
-      console.error("Failed to fetch balance:", error);
-      setBalance(null);
-    }
-  }, []);
+    },
+    []
+  );
 
   const handleWalletConnection = useCallback(
     (address: string) => {
       setTonWalletAddress(address);
-      console.log("Wallet connected successfully!");
-      setIsLoading(false);
-      fetchBalance(address); // Загружаем баланс
+      fetchBalance(address).then((balance) => setWalletData(balance, address));
     },
-    [fetchBalance]
+    [fetchBalance, setWalletData]
   );
 
   const handleWalletDisconnection = useCallback(() => {
@@ -113,11 +118,14 @@ export const WalletPage = () => {
             alignItems: "center",
           }}
         >
-          <div className="wallet-page__account" style={{ padding: "25px 0" }}>
+          <div
+            className="wallet-page__account mt-10"
+            style={{ padding: "25px 0" }}
+          >
             <h3>Your balance</h3>
             <div className="wallet-page__plaque">
-              <span>
-                {balance !== null ? balance.toFixed(2) : "Loading..."}
+              <span className="!py-2">
+                {balance !== null ? balance.toFixed(2) : "0"}
               </span>
               <img src={walletPagePlaque} alt="" />
             </div>
@@ -125,7 +133,7 @@ export const WalletPage = () => {
           <div className="wallet-page__account">
             <h3>Withdrawn:</h3>
             <div className="wallet-page__plaque">
-              <span>0</span>
+              <span className="!py-2">0</span>
               <img src={walletPagePlaque} alt="" />
             </div>
           </div>

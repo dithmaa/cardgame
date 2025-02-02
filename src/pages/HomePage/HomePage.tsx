@@ -23,7 +23,6 @@ export const HomePage = () => {
           <div className="logo">
             <img src={logoImg} alt="" />
           </div>
-          <h1 style={{ color: "white" }}>{userName ? userName : "Name"}</h1>
           <div className="actions">
             <div className="actions__item">
               <Link to="/game" className="actions__item_btn">
